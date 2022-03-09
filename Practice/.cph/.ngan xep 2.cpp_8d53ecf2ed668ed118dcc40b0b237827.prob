@@ -1,0 +1,1 @@
+{"name":"Local: ngan xep 2","url":"d:\\Code\\Data-Structure-and-Algorithms\\Practice\\ngan xep 2.cpp","tests":[{"id":1644922362442,"input":"9\nPUSH 1\nPUSH 2\nPOP\nPRINT\nPUSH 3\nPRINT\nPOP\nPOP\nPRINT","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code\\Data-Structure-and-Algorithms\\Practice\\ngan xep 2.cpp","group":"local","local":true}

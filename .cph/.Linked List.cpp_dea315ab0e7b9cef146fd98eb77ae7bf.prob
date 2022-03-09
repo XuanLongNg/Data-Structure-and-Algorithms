@@ -1,0 +1,1 @@
+{"name":"Local: Linked List","url":"d:\\Data-Structure-and-Algorithms\\Linked List.cpp","tests":[{"id":1641897089392,"input":"5\n1 2 3 4 5","output":"1 2 3 4 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Data-Structure-and-Algorithms\\Linked List.cpp","group":"local","local":true}

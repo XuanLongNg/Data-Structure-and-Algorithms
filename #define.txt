@@ -1,0 +1,26 @@
+#include <iostream> // keyboard input / output 
+#include <fstream> // disk (file) input / output
+#include <bitset> // bit array 
+#include <cmath> // mathematic functions
+#include <math.h> // mathematic functions
+#include <windows.h> // windows environment
+#include <cstring>
+#include <string>
+#include <time.h>
+#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
+------------------------------------
+#define For(i,a,b) for(int i=a;i<b;i++)
+#define pb push_back
+#define f first 
+#define s second
+#define ll long long
+#define ld long double
+#define lli unsigned long long int
+#define vec(c) vector<c>
+#define rev(c) reverse(c.begin(),c.end())
+#define pau system("pause");
+#define Mod 1000000007
+#define N 1000001
+#define Ite ::iterator
