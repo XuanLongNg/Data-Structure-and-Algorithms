@@ -54,7 +54,7 @@ void check(int *a,int n){
             }
         }
     }
-    cout<<count<<endl;
+    cout<<count<<endl; 
 }   
 int main(){
     int n; cin>>n;
