@@ -39,19 +39,16 @@ No
 #define ll long long
 using namespace std;
 void check(int *a,int n){
-    if(n%2==1){
-        cout<<"NO"<<endl;
-        return;
-    }
+    
     int b[n];
     For(i,0,n) b[i]=a[i];
     sort(b,b+n);
     For(i,0,n)
     if(a[i]!=b[i]&&a[i]!=b[n-i-1]){
-        cout<<"NO"<<endl;
+        cout<<"No"<<endl;
         return;
     }
-    cout<<"YES"<<endl;
+    cout<<"Yes"<<endl;
 
 }
 int main(){

@@ -49,46 +49,33 @@ Output
 using namespace std;
 int n;
 int a[20];
-string k(20,' ');
 vector<string> h;
-void out(){
-    cout<<"\t"<<k<<endl;
+void out(string k){
     h.push_back(k);
 }
-void add(int so,int &g){
-    cout<<k<<endl;
-    while(so){
-        k[g]=so%10+'0';
-        g++; so/=10;
-    }
-}
-void Try(int count,int i,int j,int n1){
+void Try(string k,int i,int j,int l,int n1){
     if(i==n1){
-        out();
+        out(k);
         return;
     }
-    For(x,j,n){
-        int g=count;
-        add(a[j],g);
-        Try(g+1,i+1,x+1,n1);
+    For(x,l,n){
+        if(a[x]>j){
+            string k1=to_string(a[x]);
+            Try(k+k1+" ",i+1,a[x],x,n1); 
+        }
+        
     }
-    
 }
 int main(){
-    string k1;
+    string k1,k;
     cin>>n;
     For(i,0,n) cin>>a[i];
-    sort(a,a+n);
-    For(i,0,n){
-        k1+=to_string(a[i]);
-        k1+=" ";
-    }
     h.push_back(k);
     int i=2;
     while(i<n){
-        Try(0,0,0,i);
+        Try(k,0,0,0,i);
         i++;
     }
     sort(h.begin(),h.end());
-    
+    For(i,0,h.size()) cout<<h[i]<<endl;
 }

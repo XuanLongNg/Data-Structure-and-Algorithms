@@ -36,21 +36,15 @@ Output
 #define Mod 1000000007
 #define ll long long
 using namespace std;
-int binary_search(int *a,int l,int r,int k){
-    int mid;
-    while(l<r){
-        mid=(l+r)/2;
-        if(a[mid]>=k) r=mid;
-        else l=mid+1;
-    }
-    return a[l];
-}
 void check(int *a,int n){
     int count=0;
     For(i,0,n-2){
         if(a[i]%2==0){
             For(j,i+1,n-1){
-                j=binary_search(a,i+1,n,i+1);
+                if(a[j]%2==1){
+                    For(k,j+1,n)
+                    if(a[k]%2==0&&a[k]<a[i]) count++;
+                }
             }
         }
     }
