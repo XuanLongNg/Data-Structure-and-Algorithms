@@ -38,8 +38,12 @@ ll Pow(ll a,ll b){
 int main(){
     int t; cin>>t;
     while(t--){
-        ll n,k; cin>>n;
-        k=Pow(n,Mod-2);
+        ll n,k=0,h; cin>>n;
+        h=n;
+        while(h){
+            k=h%10+k*10;
+            h/=10;
+        }
         cout<<Pow(n,k)<<endl;
     }
 }
