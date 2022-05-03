@@ -46,7 +46,7 @@ void chuyen_mtke_sang_dske(int dinh){
             if(mtke[i][j]==1) dske[i].push_back(j+1);
         }
     }
-}
+} 
 int main(){
     int n,k; cin>>n;
     For(i,0,n){

@@ -38,6 +38,7 @@ No
 #include <map>
 #include <vector>
 #include <stack>
+#include <cstring>
 #include <sstream>
 #define For(i,a,b) for(int i=a;i<b;i++)
 #define Mod 1000000007
@@ -45,16 +46,33 @@ No
 using namespace std;
 int main(){
     int n; cin>>n; cin.ignore();
-    
     while(n--){
         string k;
         stack<string>a;
+        bool check[20];
+        int c=0;
+        memset(check,1,20);
         getline(cin,k);
         For(i,0,k.size()){
-            if(k[i]=='(') a.push("(");
-            else if(k[i]==')') a.pop();
+            if(k[i]=='('){
+                check[c]=false;
+                cout<<check[c]<<endl;
+                c++;
+            }else if(k[i]!=')'&&k[i]!='('){
+                check[c]=true;
+            }else{
+                cout<<check[c]<<endl;
+                c--;
+            }
         }
-        if(a.size()==0) cout<<"YES";
+        c=1;
+        For(i,0,20){
+            if(check[i]==false){
+                c=0;
+                break;
+            }
+        }
+        if(c==1) cout<<"YES";
         else cout<<"NO";
         cout<<endl;
     }

@@ -25,46 +25,93 @@ Input
 Output
 2
 */
-#include <iostream>
-#include <math.h>
-#include <algorithm>
-#include <map>
-#include <vector>
-#include <stack>
-#include <queue>
+#include <bits/stdc++.h>
+#include <cstring>
+#define faster()				    \
+	ios_base::sync_with_stdio(0);	\
+	cin.tie(NULL);  	     	    \
+	cout.tie(NULL)
+#define test()				\
+	int test;				\
+	cin>>test;				\
+	while(test--)		
 #define For(i,a,b) for(int i=a;i<b;i++)
 #define Fori(i,a,b) for(int i=b-1;i>=a;i--)
-#define Mod 1000000007
+#define pb push_back
+#define f first 
+#define s second
 #define ll long long
+#define ld long double
+#define ulli usignal long long int
+#define lli unsigned long long int
+#define vec(c) vector<c>
+#define vi vector<int>
+#define vll vector<long long>
+#define rev(c) reverse(c.begin(),c.end())
+#define pau system("pause");
+#define Mod 1000000007
+#define N 1000001
+#define Ite ::iterator
+#define pii pair<int,int>
 using namespace std;
 int Min;
-void out(int count){
-    if(count<Min){
-        Min=count;
+vector<int> a[1000];
+int n, m;
+map<pii,pii> truoc;
+map<pii,bool> check;
+void Set(){
+    For(i,0,m){
+        For(j,0,n){
+            truoc[pii(i,j)] =pii(-1,-1);
+            check[pii(i,j)] =0;
+        }
+        a[i].clear();
+    }
+    Min=n+m;
+}
+void Try(){
+    queue<pii> ans;
+    ans.push(pii(0,0));
+    check[pii(0,0)]=1;
+    truoc[pii(0,0)]=pii(-1,-1);
+    while(!ans.empty()){
+        pii h=ans.front();
+        int k=a[h.first][h.second],i=h.first,j=h.second;
+        ans.pop();
+        if(!check[pii(i,j+k)]&&i<m&&j+k<n){
+            ans.push(pii(i,j+k));
+            check[pii(i,j+k)]=1;
+            truoc[pii(i,j+k)]=pii(i,j);
+        }
+        if(!check[pii(i+k,j)]&&i+k<m&&j<n){
+            ans.push(pii(i+k,j));
+            check[pii(i+k,j)]=1;
+            truoc[pii(i+k,j)]=pii(i,j);
+        }
     }
 }
-void check(std::vector<int> a[1000],int n,int m,int count,int i,int j){
-    For(x,0,2){
-        if(i==n-1&&j==m-1) out(count);
-        else if(x==0&&i+a[i][j]<n) check(a,n,m,count+1,i+a[i][j],j);
-        else if(x==1&&j+a[i][j]<m) check(a,n,m,count+1,i,j+a[i][j]);
+int find(){
+    int count=0;
+    pii k(m-1,n-1);
+    while(truoc[k]!=pii(-1,-1)){
+        count++;
+        k=truoc[k];
     }
+    if(k!=pii(0,0)) count=Min+1;
+    return Min<count?-1:count;
 }
 int main(){
     int t; cin>>t;
     while(t--){
-        int n,m,k; cin>>n>>m;
-        Min=n+m;
-        vector<int> a[n];
-        For(i,0,n)
+        int k; cin>>n>>m;
+        Set();
+        For(i,0,m)
         For(j,0,n){
             cin>>k;
             a[i].push_back(k);
         }
-        check(a,n,m,0,0,0);
-        if(Min==n+m) Min=-1;
-        cout<<Min<<endl;
-        Min=1e9;
+        Try();
+        cout<< find()<<endl;
     }
 }
 

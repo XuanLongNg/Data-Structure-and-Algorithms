@@ -1,25 +1,39 @@
+#include <bits/stdc++.h>
+#define For(i, a, b) for (int i = a; i < b; i++)
+#define SORT(a) sort(a.begin(), a.end())
+#define OUT(a) for(auto u:a) cout<<u<<" ";cout<<endl;
+#define GET(a) for(auto &u:a) cin>>u;
 
-#include <map>
-#include <iostream>
+#define vi vector<int>
+#define pi pair<int, int>
+#define ll long long
 using namespace std;
 
-#define long long long
-const long M = 1000000007; // modulo
-map<long, long> F;
-
-long f(long n) {
-	if (F.count(n)) return F[n];
-	long k=n/2;
-	if (n%2==0) { // n=2*k
-		return F[n] = (f(k)*f(k) + f(k-1)*f(k-1)) % M;
-	} else { // n=2*k+1
-		return F[n] = (f(k)*f(k+1) + f(k-1)*f(k)) % M;
-	}
+ll code(string s){
+	if(s[0]=='0') return 0;
+	int x=stoi(s);
+	if(x>0 && x<27) return 1;
+	return 0;
 }
 
-main(){
-	long n;
-	F[0]=F[1]=1;
-	while (cin >> n)
-	cout << (n==0 ? 0 : f(n-1)) << endl;
+void solve(){
+	string s;
+	cin>>s;
+	int n=s.size();
+	ll dp[n+1];
+	dp[n]=1;
+	dp[n-1]=code(string(s.begin()+n-1,s.end()));
+	for(int i=n-2;i>=0;i--){
+		dp[i]=code(string(s.begin()+i,s.begin()+i+1))*dp[i+1];
+		dp[i]+=code(string(s.begin()+i,s.begin()+i+2))*dp[i+2];
+	}
+	cout<<dp[0]<<endl;
+}
+
+int main()
+{	
+    int t;
+    cin>>t;
+    while(t--)
+    solve();
 }

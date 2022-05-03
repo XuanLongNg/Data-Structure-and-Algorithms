@@ -32,7 +32,7 @@ Output
 #include <map>
 #include <vector>
 #define For(i,a,b) for(int i=a;i<b;i++)
-#define Mod 1000000007
+#define Mod 1239
 #define ll long long
 using namespace std;
 ll Pow(ll a,ll b){

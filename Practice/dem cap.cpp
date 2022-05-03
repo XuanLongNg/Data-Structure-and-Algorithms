@@ -19,94 +19,102 @@ Input:
 Output:
 3
 */
-#include <iostream>
-#include <algorithm>
-#include <map>
+#include <bits/stdc++.h>
+#define faster()				    \
+	ios_base::sync_with_stdio(0);	\
+	cin.tie(NULL);  	     	    \
+	cout.tie(NULL)
+#define test()				\
+	int test;				\
+	cin>>test;				\
+	while(test--)		
 #define For(i,a,b) for(int i=a;i<b;i++)
-#define Mod 1000000007
+#define Fori(i,a,b) for(int i=b-1;i>=a;i--)
+#define pb push_back
+#define f first 
+#define s second
 #define ll long long
+#define ld long double
+#define ulli usignal long long int
+#define lli unsigned long long int
+#define vec(c) vector<c>
+#define vi vector<int>
+#define vll vector<long long>
+#define rev(c) reverse(c.begin(),c.end())
+#define pau system("pause");
+#define Mod 1000000007
+#define N 1000001
+#define Ite ::iterator
 using namespace std;
-void display(int *a,int n){
-    For(i,0,n) cout<<a[i]<<" ";
-    cout<<endl;
+vi x,y;
+int n,m;
+int count1=0;
+void Set(){
+    x.clear(); y.clear();
+    count1=0;
 }
-int binary_search(int *a,int l,int r,int k){
-    int mid;
-    while(l<r){
-        mid=(l+r)/2;
-        if(a[mid]>=k) r=mid;
-        else l=mid+1;
+void Count(){
+    int k=-1;
+    while(1){
+        k=lower_bound(y.begin()+k+1,y.end(),0)-y.begin();
+        if(y[k]==0){
+            int h=lower_bound(x.begin(),x.end(),1)-x.begin();
+            count1+=n-h;
+
+        }else break;
     }
-    if(a[l]==k) return l;
-    return -1;
-}
-int binary_search_K(int *a,int n,int k){
-    int l=0,r=n-1,mid;
-    while(l<r){
-        mid=(l+r)/2;
-        if(a[mid]>=k) r=mid;
-        else l=mid+1;
+    k=-1;
+    while(1){
+        k=lower_bound(y.begin()+k+1,y.end(),1)-y.begin();
+        if(y[k]==1){
+            int h=lower_bound(x.begin(),x.end(),2)-x.begin();
+            count1+=n-h;
+            
+        }else break;
     }
-    return l;
-}
-void Count(int *a,int *b,int n,int m,int &count){
-    int k=binary_search(b,0,m,0),j=0;
-    while(k!=-1){
-        int i=0;
-        while(a[i]==0) i++;
-        count+=n-i;
-        j=binary_search(b,j,m,2)+1;
-        k=binary_search(b,j,m,0);
-        
-    }
-    k=binary_search(b,0,m,1); j=0;
-    while(k!=-1){
-        int i=0;
-        while(a[i]<2) i++;
-        count+=n-i;
-        j=binary_search(b,j,m,1)+1;
-        k=binary_search(b,j,m,1);
-        
-    }
-    k=binary_search(b,0,m,2); j=0;
-    while(k!=-1){
-        int i=0;
-        while(binary_search(a,i,n,3)!=-1){
-            count++;
-            i=binary_search(a,i,n,3)+1;
-           
-        }
-        j=binary_search(b,j,m,2)+1;
-        k=binary_search(b,j,m,2);
+    k=-1;
+    while(1){
+        k=lower_bound(y.begin()+k+1,y.end(),2)-y.begin();
+        if(y[k]==2){
+            int h=lower_bound(x.begin(),x.end(),3)-x.begin();
+            while(x[h]==3){
+                count1++;
+                h++;
+            }
+        }else break;
     }
     For(i,0,n){
-        if(a[i]==2){
-            int k=binary_search_K(b,m,5);
-            if(b[k]>=5){
-                count+=m-k;
-                 
+        if(x[i]==2){
+            k=lower_bound(y.begin(),y.end(),5)-y.begin();
+            count1+=m-k;
+      
+        }else if(x[i]>2){
+            k=lower_bound(y.begin(),y.end(),x[i]+1)-y.begin();
+            if(y[k]>x[i]){
+                count1+=m-k;
+           
             }
-        }else if(a[i]>2){
-            int k=binary_search_K(b,m,a[i]+1);
-            if(a[i]<=b[k]){
-                count+=m-k;
-                
-            }
+            else break;
         }
     }
-    
 }
 int main(){
-    int t; cin>>t;
-    while(t--){
-        int n,m,count=0,k; cin>>n>>m;
-        int a[n],b[m];
-        map<int,int>a1,a2;
-        For(i,0,n) cin>>a[i];
-        For(i,0,m) cin>>b[i];
-        sort(a,a+n);
-        sort(b,b+m);
-        Count(a,b,n,m,count);
-        cout<<count<<endl;
+    faster();
+    test(){
+        cin>>n>>m;
+        int k;
+        Set();
+        For(i,0,n){
+            cin>>k;
+            x.push_back(k);
+        }
+        For(i,0,m){
+            cin>>k;
+            y.push_back(k);
+        }
+        sort(x.begin(),x.end());
+        sort(y.begin(),y.end());
+        Count();
+        cout<<count1<<endl;
     }
 }

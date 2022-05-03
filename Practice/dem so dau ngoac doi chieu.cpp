@@ -46,17 +46,18 @@ Output
 #define ll long long
 using namespace std;
 int main(){
-    int n; cin>>n; cin.ignore();
+    int n; cin>>n;
     while(n--){
         string k;
-        stack<string>a;
-        getline(cin,k);
-        For(i,0,k.size()){
-            if(k[i]=='(') a.push("(");
-            else if(k[i]==')') a.pop();
+        int count_l=0,count_r=0,doi=0;
+        cin>>k;
+        if(k[0]==')') doi++;
+        For(i,1,k.size()-1){
+            if(k[i]==')') count_r++;
+            else count_l++;
         }
-        if(a.size()==0) cout<<"YES";
-        else cout<<"NO";
-        cout<<endl;
+        if(k[k.size()-1]=='(') doi++;
+        doi+=abs(count_r-count_l)-1;
+        cout<<doi<<endl;
     }
 }

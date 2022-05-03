@@ -58,6 +58,7 @@ int main(){
             a.push_back(k);
         }
     }
+    cout<<a.size()<<endl;
     For(i,0,a.size()){
         For(j,0,2)
         cout<<a[i][j]<<" ";

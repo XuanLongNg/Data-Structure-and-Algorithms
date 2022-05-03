@@ -20,30 +20,50 @@ Output
 2
 
 */
-#include <iostream>
-#include <math.h>
-#include <algorithm>
-#include <map>
-#include <vector>
+#include <bits/stdc++.h>
+#include <cstring>
+#define faster()				    \
+	ios_base::sync_with_stdio(0);	\
+	cin.tie(NULL);  	     	    \
+	cout.tie(NULL)
+#define test()				\
+	int test;				\
+	cin>>test;				\
+	while(test--)		
 #define For(i,a,b) for(int i=a;i<b;i++)
-#define Mod 1000000007
+#define Fori(i,a,b) for(int i=b-1;i>=a;i--)
+#define pb push_back
+#define f first 
+#define s second
 #define ll long long
+#define ld long double
+#define ulli usignal long long int
+#define lli unsigned long long int
+#define vec(c) vector<c>
+#define vi vector<int>
+#define vll vector<long long>
+#define rev(c) reverse(c.begin(),c.end())
+#define pau system("pause");
+#define Mod 1000000007
+#define N 1000001
+#define Ite ::iterator
 using namespace std;
 int main(){
-    int n; cin>>n;
-    int a[n];
-    For(i,0,n) cin>>a[i];
-    vector<int> F;
-    F.resize(n+1,0);
-    int k=1;
-    F[0]=0;
-    For(i,1,n+1){
-        F[i]=1;
-        for(int j=i-1;j>=1;j--)
-        if(a[j-1]<a[i-1]){
-            F[i]=max(F[i],F[j]+1);
-        }
-        k=max(F[i],k);
+    int n,k; cin>>n;
+    vi a(n),lct(n);
+    For(i,0,n){
+        cin>>a[i];
+        lct[a[i]]=i;
     }
-    cout<<n-k<<endl;
+    int Max=0;
+    vector<int> F(n+1,1);
+    F[0]=0;
+    For(i,1,n){
+        int x=a[i];
+        if(x>1 && lct[x-1]<i){
+            F[a[i]]=F[a[i]-1]+1;
+            Max=max(Max,F[a[i]]);
+        }
+    }
+    cout<<n-Max<<endl;
 }

@@ -51,39 +51,80 @@ Tổng các phần tử trên cột cuối cùng là:
 
 (473761863+527013321+580264779) % 1000000007 = 581039956
 */
-#include <iostream>
-#include <math.h>
-#include <algorithm>
-#include <map>
-#include <vector>
+#include <bits/stdc++.h>
+#include <cstring>
+#define faster()				    \
+	ios_base::sync_with_stdio(0);	\
+	cin.tie(NULL);  	     	    \
+	cout.tie(NULL)
+#define test()				\
+	int test;				\
+	cin>>test;				\
+	while(test--)		
 #define For(i,a,b) for(int i=a;i<b;i++)
-#define Mod 1000000007
+#define Fori(i,a,b) for(int i=b-1;i>=a;i--)
+#define pb push_back
+#define f first 
+#define s second
 #define ll long long
+#define ld long double
+#define ulli usignal long long int
+#define lli unsigned long long int
+#define vec(c) vector<c>
+#define vi vector<int>
+#define vll vector<long long>
+#define rev(c) reverse(c.begin(),c.end())
+#define pau system("pause");
+#define Mod 1000000007
+#define N 1000001
+#define Ite ::iterator
 using namespace std;
-ll a[10][10];
-ll b[10][10];
-ll tinhtich(int i, int j,int n,int k){
-    ll c=0;
-    if(k==0) return b[i][j];
-    if(k%2==0){
-        For(i1,0,n) c+=tinhtich(i,i1,n,k/2)*b[i1][j]%Mod;
-        return a[i][j]=c%Mod;
+struct Matrix{
+    vec(vll) matrix;
+	Matrix operator*(Matrix b){
+        Matrix c;
+        For(i,0,b.matrix.size()){
+			vll m;
+            For(j,0,b.matrix.size()){
+                ll h=0;
+                For(k,0,b.matrix.size()){
+                    h+=this->matrix[i][k]*b.matrix[k][j];
+                    h%=Mod;
+                }
+                m.push_back(h);
+            }
+			c.matrix.push_back(m);
+        }
+        return c;
     }
-    For(i1,0,n) c+=tinhtich(i,i1,n,k-1)*b[i1][j]%Mod;
-    return a[i][j]=c%Mod;
+};
+Matrix Pow(Matrix a,Matrix b,int n,int k){
+    if(k==1) return b;
+    if(k%2==0){
+        Matrix temp=Pow(a,b,n,k/2);
+        return temp*temp;
+    }else return a*Pow(a,b,n,k-1);
 }
 int main(){
     int t; cin>>t;
     while(t--){
-        ll n,k,total=0; cin>>n>>k;
-        For(i,0,n)
-        For(j,0,n){
-            cin>>a[i][j];
-            b[i][j]=a[i][j];
-        }
+        Matrix a,b;
+        ll n,k; cin>>n>>k;
+	    ll g;
+	    For(i,0,n){
+		    vll h;
+		    For(j,0,n){
+			    cin>>g;
+			    h.push_back(g);
+		    }
+		    a.matrix.push_back(h);
+	    }
+        b=a;
+        b=Pow(a,b,n,k);
+        ll total=0;
         For(i,0,n){
-            a[i][n-1]=tinhtich(i,n-1,n,k);
-            total+=a[i][n-1]%Mod;
+            total+=b.matrix[i][n-1];
+            total%=Mod;
         }
         cout<<total<<endl;
     }

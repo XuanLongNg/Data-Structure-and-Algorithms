@@ -27,6 +27,7 @@ Output:
 #include <vector>
 #include <stack>
 #include <queue>
+#include <cstring>
 #define For(i,a,b) for(int i=a;i<b;i++)
 #define Mod 1000000007
 #define ll long long
@@ -34,9 +35,11 @@ using namespace std;
 const int nMax=1000006;
 vector<int> dske[nMax];
 vector<int> dscanh[nMax];
-void set(int dinh,int canh){
-    For(i,0,dinh) dske[i].clear();
-    For(i,0,canh) dscanh[nMax].clear();
+bool check[nMax];
+void set(){
+    For(i,0,nMax) dske[i].clear();
+    For(i,0,nMax) dscanh[i].clear();
+    memset(check,false,nMax);
 }
 void chuyendscanhsangdske(int dinh,int canh){
     For(i,0,canh){
@@ -47,7 +50,6 @@ void chuyendscanhsangdske(int dinh,int canh){
 void BFS(int u){
     queue<int> k;
     k.push(u);
-    bool check[nMax];
     check[k.front()]=1;
     while(!k.empty()){
         int h=k.front(); cout<<h<<" ";
@@ -67,7 +69,7 @@ int main(){
     while(t--){
         int dinh, canh, dd;
         cin>>dinh>>canh>>dd;
-        set(dinh,canh);
+        set();
         int dd1,dc;
         For(i,0,canh){
             cin>>dd1>>dc;

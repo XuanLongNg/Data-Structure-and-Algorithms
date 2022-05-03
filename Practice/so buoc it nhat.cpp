@@ -32,8 +32,11 @@ int main(){
     int t; cin>>t;
     while(t--){
         int n; cin>>n;
-        int a[n]; 
-        For(i,0,n) cin>>a[i];
+        int a[n];
+        For(i,0,n){
+            cin>>a[i];
+            
+        }
         vector<int> F;
         F.resize(n+1,0);
         int k=1;
@@ -41,7 +44,7 @@ int main(){
         For(i,1,n+1){
             F[i]=1;
             for(int j=i-1;j>=1;j--)
-                if(a[j-1]<a[i-1]){
+                if(a[j-1]<=a[i-1]){
                     F[i]=max(F[i],F[j]+1);
                 }
             k=max(F[i],k);
