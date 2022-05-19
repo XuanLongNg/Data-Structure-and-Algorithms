@@ -1,0 +1,1 @@
+{"name":"Local: ma gray 2","url":"d:\\Code\\Data Struture and Algorithm\\Practice\\ma gray 2.cpp","tests":[{"id":1652295406642,"input":"2\n\n01101\n\n01011","output":"01101\n01011"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code\\Data Struture and Algorithm\\Practice\\ma gray 2.cpp","group":"local","local":true}

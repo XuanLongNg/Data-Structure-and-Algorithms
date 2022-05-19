@@ -14,7 +14,21 @@
         "xutility": "cpp",
         "initializer_list": "cpp",
         "utility": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ios": "cpp",
+        "tuple": "cpp",
+        "exception": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "type_traits": "cpp",
+        "string": "cpp",
+        "atomic": "cpp",
+        "system_error": "cpp",
+        "xmemory": "cpp",
+        "limits": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

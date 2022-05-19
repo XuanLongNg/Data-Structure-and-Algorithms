@@ -48,16 +48,19 @@ using namespace std;
 int main(){
     int n; cin>>n;
     while(n--){
-        string k;
-        int count_l=0,count_r=0,doi=0;
-        cin>>k;
-        if(k[0]==')') doi++;
-        For(i,1,k.size()-1){
-            if(k[i]==')') count_r++;
-            else count_l++;
+        string k; cin>>k;
+        stack<char> s;
+        int doi=0;
+        For(i,0,k.size()){
+            if(!s.empty()&&k[i]==')'&&s.top()=='(') s.pop();
+            else s.push(k[i]);
         }
-        if(k[k.size()-1]=='(') doi++;
-        doi+=abs(count_r-count_l)-1;
+        while(!s.empty()){
+            if(s.top()=='(') doi++;
+            s.pop();
+            if(s.top()==')') doi++;
+            s.pop();
+        }
         cout<<doi<<endl;
     }
 }

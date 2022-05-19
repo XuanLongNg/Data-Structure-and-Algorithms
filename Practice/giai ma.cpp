@@ -52,51 +52,27 @@ int gt(int n){
     if(n==0) return 1;
     return n*gt(n-1);
 }
-bool ans1(char k){
-    if(k=='1'||k=='2') return true;
+bool check(string k){
+    if(k[0]=='0') return false;
+    int h=stoi(k);
+    if(h>0&&h<27) return true;
     return false;
 }
-int Try(int dp[3][10],string n,int &ans){
-    int count=0,h, check=0;
-    For(i,0,3){
-        For(j,0,n.size()){
-            if(n[j]=='0'&&n[j-1]!='1'&&n[j-1]!='2') return 0;
-            if(n[j-1]==i+'0'){
-                dp[i][n[j]-'0']++;
-                if(ans1(n[j-1])&&ans1(n[j-2])){
-                    check++;
-                    if(n[j-1]=='2'&&n[j]>='7') check--;
-                }
-            }
-            else if(i==0) dp[i][n[j]-'0']++;
-        }
+int Try(string n)
+{
+    vi dp(n.size()+1);
+    dp[n.size()]=1;
+    dp[n.size()-1]=check(string(n.begin()+n.size()-1,n.end()));
+    Fori(i,0,n.size()-1){
+        dp[i]=check(string(n.begin()+i,n.begin()+i+1))*dp[i+1];
+        dp[i]+=check(string(n.begin()+i,n.begin()+i+2))*dp[i+2];
     }
-    int i=9;
-    ans=1;
-    while(i>=7){
-        dp[2][i]=0;
-        i--;
-    }
-    For(i,1,3){
-        For(j,0,10) 
-        if(j!=0) count+=dp[i][j];
-    }
-    h=1;
-    while(h<=count){
-        count-=h==2?(check>1?check/2:check):0;
-        if(count<h) break;
-        ans+=gt(count)/(gt(h)*gt(count-h));
-        h++;
-    }
-    return ans;
+    return dp[0];
 }
 int main(){
     faster();
     test(){
         string n; cin>>n;
-        int dp[3][10],ans=0;
-        For(i,0,3)
-        For(j,0,10) dp[i][j]=0;
-        cout<<Try(dp,n,ans)<<endl;
+        cout<<Try(n)<<endl;
     }
 }

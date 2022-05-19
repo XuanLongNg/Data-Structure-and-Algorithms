@@ -50,20 +50,21 @@ Output
 using namespace std;
 int main(){
     int n,k; cin>>n;
-    vi a(n),lct(n);
+    vi a,lct;
+    lct.resize(n+1);
     For(i,0,n){
-        cin>>a[i];
+        cin>>k;
+        a.push_back(k);
         lct[a[i]]=i;
     }
-    int Max=0;
     vector<int> F(n+1,1);
     F[0]=0;
     For(i,1,n){
         int x=a[i];
         if(x>1 && lct[x-1]<i){
             F[a[i]]=F[a[i]-1]+1;
-            Max=max(Max,F[a[i]]);
         }
     }
-    cout<<n-Max<<endl;
+    auto Max=max_element(F.begin(),F.end());
+    cout<<n-*Max<<endl;
 }

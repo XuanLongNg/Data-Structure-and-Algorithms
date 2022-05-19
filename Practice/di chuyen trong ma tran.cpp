@@ -55,7 +55,7 @@ Output
 #define pii pair<int,int>
 using namespace std;
 int Min;
-vector<int> a[1000];
+vector<int> a[1001];
 int n, m;
 map<pii,pii> truoc;
 map<pii,bool> check;
@@ -74,6 +74,7 @@ void Try(){
     ans.push(pii(0,0));
     check[pii(0,0)]=1;
     truoc[pii(0,0)]=pii(-1,-1);
+    
     while(!ans.empty()){
         pii h=ans.front();
         int k=a[h.first][h.second],i=h.first,j=h.second;
@@ -88,17 +89,8 @@ void Try(){
             check[pii(i+k,j)]=1;
             truoc[pii(i+k,j)]=pii(i,j);
         }
+        if(pii(i+k,j)==pii(m,n)||pii(i,j+k)==pii(m,n)) break;
     }
-}
-int find(){
-    int count=0;
-    pii k(m-1,n-1);
-    while(truoc[k]!=pii(-1,-1)){
-        count++;
-        k=truoc[k];
-    }
-    if(k!=pii(0,0)) count=Min+1;
-    return Min<count?-1:count;
 }
 int main(){
     int t; cin>>t;

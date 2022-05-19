@@ -44,36 +44,31 @@ No
 #define Mod 1000000007
 #define ll long long
 using namespace std;
+bool Operator(char k){
+    if(k=='+'||k=='-'||k=='*'||k=='/'||k=='^') return true;
+    return false;
+}
 int main(){
     int n; cin>>n; cin.ignore();
     while(n--){
         string k;
-        stack<string>a;
-        bool check[20];
-        int c=0;
-        memset(check,1,20);
+        stack<char>a;
+        int c;
         getline(cin,k);
         For(i,0,k.size()){
-            if(k[i]=='('){
-                check[c]=false;
-                cout<<check[c]<<endl;
-                c++;
-            }else if(k[i]!=')'&&k[i]!='('){
-                check[c]=true;
-            }else{
-                cout<<check[c]<<endl;
-                c--;
+            if(k[i]=='('||Operator(k[i])) a.push(k[i]);
+            else if(k[i]==')'){
+                c=1;
+                while(!a.empty()&&a.top()!='('){
+                    c=0;
+                    a.pop();
+                }
+                if(c==1) break;
+                a.pop();
             }
         }
-        c=1;
-        For(i,0,20){
-            if(check[i]==false){
-                c=0;
-                break;
-            }
-        }
-        if(c==1) cout<<"YES";
-        else cout<<"NO";
+        if(c==1) cout<<"Yes";
+        else cout<<"No";
         cout<<endl;
     }
 }

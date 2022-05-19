@@ -52,24 +52,15 @@ Output
 #define Ite ::iterator
 using namespace std;
 const int nMax=1000006;
-vi dske[1000];
+vi dske[1001];
 vector<pair<int,int>> dscanh;
-bool check[10000];
+bool check[1001],ans;
 int dinh, canh;
 void Set(){
+    ans=0;
     dscanh.clear();
     For(i,0,1000) dske[i].clear();
-    memset(check,0,10000);
-}
-void DFS(int u){
-    int v;
-    check[u]=1;
-    For(i,0,dske[u].size()){
-        v=dske[u][i];
-        if(!check[v]){
-            DFS(v);
-        }
-    }
+    memset(check,0,sizeof(check));
 }
 void convert(){
     For(i,0,canh){
@@ -78,18 +69,18 @@ void convert(){
         dske[dc].push_back(dd);
     }
 }
-bool checkdinh(){
-    For(i,1,dinh+1)
-    if(!check[i]) return 1;
-    return 0;
-}
-void Count(){
-    For(i,1,dinh+1){
-        memset(check,0,10000);
-        check[i]=true;
-        DFS(i==1?2:1);
-        if(checkdinh()) cout<<i<<" ";
-
+void Hamilton(int u,int count){
+    if(ans) return;
+    if(count==dinh){
+        ans=1;
+        return;
+    }
+    for(auto i: dske[u]){
+        if(!check[i]){
+            check[i] = true;
+            Hamilton(i,count+1);
+            check[i] = false;
+        }
     }
 }
 int main(){
@@ -103,8 +94,12 @@ int main(){
             dscanh.push_back(pair<int,int>(dd,dc));
         }
         convert();
-        Count();
-        cout<<endl;
+        For(i,1,dinh+1){
+            check[i]=true;
+            Hamilton(i,1);
+            check[i]=false;
+        }
+        cout<<ans<<endl;
     }
 }
 
